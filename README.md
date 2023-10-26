@@ -1,5 +1,5 @@
 # Love_message
-Send an Email random love message to your loved one
+Send an Email random love message to your dearest one
 
 ![image](https://github.com/ikhsanmasu/Love_message/assets/76894210/13fa57b7-f964-4b3b-9889-4cc96455e642)
 
