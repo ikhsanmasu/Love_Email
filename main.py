@@ -1,18 +1,21 @@
-from twilio.rest import Client
 from random import choice
+import smtplib
 
 with open(file="love_text.txt") as file:
     text = file.readlines()
     love_message = choice(text)
 
-account_sid = "YOUR SID ACCOUNT"
-auth_token = "AUTHENTICATION TOKEN"
-client = Client(account_sid, auth_token)
+to = 'email destination@gmail.com'
+outlook_user = 'your email @outlook.com'
+outlook_pwd = 'your app mail password'
 
-message = client.messages.create(
-                              body=love_message,
-                              from_='whatsapp:YOUR TWILIO NUMBER',
-                              to='whatsapp:NUMBER YOU WANT TO SEND MESSAGE'
-                          )
-print(message.status)
+with smtplib.SMTP("smtp-mail.outlook.com", 587) as server:
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+    server.login(outlook_user, outlook_pwd)
 
+    header = 'To: ' + to + '\n' + 'From: ' + outlook_user + '\n' + 'Subject: Daily Love Message \n'
+    msg = header + f'\n {love_message} \n\n'
+
+    server.sendmail(outlook_user, to, msg)
